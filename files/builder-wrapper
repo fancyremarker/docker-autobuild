@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -a
+
+# Source ENV from .aptible.env, if it exists
+if [ -e /app/.aptible.env ]; then
+  source /app/.aptible.env
+fi
+
+/build/builder

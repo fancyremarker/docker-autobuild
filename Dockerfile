@@ -5,9 +5,10 @@ MAINTAINER Frank Macreery <frank@macreery.com>
 RUN ln -s -f /bin/true /usr/bin/chfn
 
 ADD files/exec-wrapper /exec-wrapper
+ADD files/builder-wrapper /builder-wrapper
 
 ONBUILD ADD . /app
-ONBUILD RUN /build/builder
+ONBUILD RUN /builder-wrapper
 
 # Set and expose default port
 ENV PORT 3000
