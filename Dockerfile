@@ -7,6 +7,9 @@ RUN ln -s -f /bin/true /usr/bin/chfn
 ADD files/exec-wrapper /exec-wrapper
 ADD files/builder-wrapper /builder-wrapper
 
+RUN apt-get update && \
+    apt-get -y install postgresql-client-9.3 postgresql-contrib-9.3
+
 ONBUILD ADD . /app
 ONBUILD RUN /builder-wrapper
 
