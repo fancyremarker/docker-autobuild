@@ -17,4 +17,11 @@ ONBUILD RUN /builder-wrapper
 ENV PORT 3000
 EXPOSE 3000
 
+# Relax permissions on files/directories used by cron to allow for easier cron setup.
+RUN chmod 777 /var/log
+RUN chmod 777 /var/run
+RUN chmod 0777 /var/spool/cron
+RUN chmod 1777 /var/spool/cron/crontabs
+RUN chmod go+s /usr/bin/crontab
+
 ENTRYPOINT ["/exec-wrapper"]
