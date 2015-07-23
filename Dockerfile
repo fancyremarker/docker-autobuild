@@ -23,5 +23,6 @@ RUN chmod 777 /var/run
 RUN chmod 0777 /var/spool/cron
 RUN chmod 1777 /var/spool/cron/crontabs
 RUN chmod go+s /usr/bin/crontab
+RUN chmod u+s /usr/sbin/cron
 
 ENTRYPOINT ["/exec-wrapper"]
