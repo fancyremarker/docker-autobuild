@@ -7,8 +7,11 @@ RUN ln -s -f /bin/true /usr/bin/chfn
 ADD files/exec-wrapper /exec-wrapper
 ADD files/builder-wrapper /builder-wrapper
 
-RUN apt-get update && \
-    apt-get -y install postgresql-client-9.3 postgresql-contrib-9.3
+RUN sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+RUN apt-get install wget ca-certificates
+RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN apt-get -y update && apt-get -y upgrade && \
+    apt-get -y install postgresql-9.4 postgresql-client-9.4 postgresql-contrib-9.4
 
 ONBUILD ADD . /app
 ONBUILD RUN /builder-wrapper
